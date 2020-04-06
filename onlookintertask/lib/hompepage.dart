@@ -45,25 +45,31 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-        colorFilter: ColorFilter.srgbToLinearGamma(),
-        image: AssetImage(
-          "assets/images/pic.jpg",
-        ),
-        fit: BoxFit.cover,
-      )),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Column(
-          children: <Widget>[
-            header(),
-            CenterPart(),
-            BottomNavBar(),
-          ],
-        ),
-      ),
+    return PageView.builder(
+      scrollDirection: Axis.vertical,
+  itemCount: 10,
+      itemBuilder: (context, position) {
+        return Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            colorFilter: ColorFilter.srgbToLinearGamma(),
+            image: AssetImage(
+              "assets/images/pic.jpg",
+            ),
+            fit: BoxFit.cover,
+          )),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Column(
+              children: <Widget>[
+                header(),
+                CenterPart(),
+                BottomNavBar(),
+              ],
+            ),
+          ),
+        );
+      }
     );
   }
 }
