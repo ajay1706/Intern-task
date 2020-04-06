@@ -67,21 +67,24 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-String dance = "Dance India Dance";
-String year  = "2020";
-String link = "view";
 
 
-class IconBar extends StatefulWidget {
-  const IconBar({
-    Key key,
-  }) : super(key: key);
+
+bool isCLicked = false;
+var voteHere = "vote";
+var dance = "Dance India Dance";
+var year  = "2020";
+var link = "view";
+
+class CenterPart extends StatefulWidget {
+
 
   @override
-  _IconBarState createState() => _IconBarState();
+  _CenterPartState createState() => _CenterPartState();
 }
 
-class _IconBarState extends State<IconBar> {
+class _CenterPartState extends State<CenterPart> {
+
   Widget socailActions({String title, IconData icon}) {
     return Container(
       height: 60,
@@ -147,20 +150,6 @@ class _IconBarState extends State<IconBar> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 100,
-      child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-        userAction(),
-        socailActions(icon: Icons.remove_red_eye, title: "500K"),
-        socailActions(icon: Icons.message, title: "1234"),
-        socailActions(icon: Icons.reply, title: "Share"),
-        _voteButton()
-      ]),
-    );
-  }
-
   Widget _voteButton() {
     return Container(
       margin: EdgeInsets.only(right: 10),
@@ -168,10 +157,10 @@ class _IconBarState extends State<IconBar> {
       child: ButtonTheme(
         height: 20,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20))
+            borderRadius: BorderRadius.all(Radius.circular(20))
         ),
         child: FlatButton(
-         color: Colors.white12,
+          color: Colors.white12,
           onPressed:  () {
             setState((){
               year = "Standup";
@@ -185,70 +174,15 @@ class _IconBarState extends State<IconBar> {
             child: Text(voteHere,
               textAlign: TextAlign.center,
               style: TextStyle(
-              color: Colors.grey
+                  color: Colors.grey
 
-            ),),
+              ),),
           ),
         ),
       ),
     );
   }
-}
-bool isCLicked = false;
-var voteHere = "vote";
-class RaisedGradientButton extends StatelessWidget {
-  final Widget child;
-  final Gradient gradient;
-  final double width;
-  final double height;
-  final Function onPressed;
 
-  const RaisedGradientButton({
-    Key key,
-    @required this.child,
-    this.gradient,
-    this.width = double.infinity,
-    this.height = 50.0,
-    this.onPressed,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(right: 10),
-      width: 100,
-      height: 35.0,
-      decoration: BoxDecoration(
-          gradient: gradient,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey[500],
-              offset: Offset(0.0, 1.5),
-              blurRadius: 1.5,
-            ),
-          ]),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-            onTap: onPressed,
-            child: Center(
-              child: child,
-            )),
-      ),
-    );
-  }
-}
-class CenterPart extends StatefulWidget {
-  const CenterPart({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  _CenterPartState createState() => _CenterPartState();
-}
-
-class _CenterPartState extends State<CenterPart> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -299,7 +233,7 @@ class _CenterPartState extends State<CenterPart> {
                             Column(
                               children: <Widget>[
                                 Text(
-                                  dance,
+                                  "$dance",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -310,14 +244,14 @@ class _CenterPartState extends State<CenterPart> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: <Widget>[
                                     Text(
-                                      year,
+                                      "$year",
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     Text(
-                                      link,
+                                      "$link",
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 14,
@@ -335,7 +269,16 @@ class _CenterPartState extends State<CenterPart> {
                     ],
                   ),
                 )),
-            IconBar(),
+            Container(
+              width: 100,
+              child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+                userAction(),
+                socailActions(icon: Icons.remove_red_eye, title: "500K"),
+                socailActions(icon: Icons.message, title: "1234"),
+                socailActions(icon: Icons.reply, title: "Share"),
+                _voteButton()
+              ]),
+            )
           ],
         ));
   }
